@@ -172,7 +172,7 @@ def get_new_nist_cve(source):
     #  resultsPerPage under https://nvd.nist.gov/developers/vulnerabilities
     # source: dummy variable, as right now only NIST is allowed as source.
     dt_end_utc = datetime.utcnow()
-    dt_start_utc = dt_end_utc - timedelta(days=7)
+    dt_start_utc = dt_end_utc - timedelta(days=2)
     cves = get_nist_cve_between(dt_start_utc, dt_end_utc)
     return cves
 
