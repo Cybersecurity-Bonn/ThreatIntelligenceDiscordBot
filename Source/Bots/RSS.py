@@ -228,7 +228,8 @@ def process_articles(articles):
     return messages, new_articles
 
 
-def send_messages(hook, messages, articles, batch_size=10):
+def send_messages(hook, messages, articles, batch_size=5):
+    # FIXME: Issue #5 commonly occurse when batch_size = 10: Embed size exceeds maximum size of 6000
     logger.debug(f"Sending {len(messages)} messages in batches of {batch_size}")
     for i in range(0, len(messages), batch_size):
         hook.send(embeds=messages[i: i + batch_size])
