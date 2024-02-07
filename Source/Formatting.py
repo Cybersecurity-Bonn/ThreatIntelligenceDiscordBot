@@ -33,8 +33,8 @@ def format_single_article(article):
                 break
     elif "description" in article:
         description = article["description"]
-        if len(description) > 2048:  # Embed descriptions are limited to 2048 in Discord API
-            description = description[:2045] + "..."
+        if len(description) > 1024:  # Embed descriptions are limited to 2048 in Discord API
+            description = description[:1021] + "..."
     if "source_id" in article:
         source_text = f"**Source**: *{article['source']} | {article['source_id']}*"
     else:
