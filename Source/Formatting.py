@@ -21,6 +21,20 @@ def format_datetime(article_datetime):
     return [article_datetime.strftime("%d, %b %Y"), article_datetime.strftime("%H:%M")]
 
 
+def format_url(url: str) -> str:
+    """
+    Given an url string, execute the following formatting steps:
+
+        1. Replace whitespace with '+'
+    :param url: the url string that needs to be formatted
+    :type url: str
+    :return: the formatted url
+    :rtype: str
+    """
+    formatted_url = url.replace(" ", "+")
+    return formatted_url
+
+
 def format_single_article(article):
     description = ""
 
@@ -50,7 +64,7 @@ def format_single_article(article):
     if "link" in article:
         message = Embed(
             title=title,
-            url=article["link"],
+            url=format_url(article["link"]),
             color=MAIN_COLOR,
         )
     else:
@@ -62,13 +76,13 @@ def format_single_article(article):
     if description:
         if "link" in article:
             message.add_field(name="Description", value=description, inline=False)
-            details_field_value =source_text + "\n" + date_text
+            details_field_value = source_text + "\n" + date_text
             if "vuln_status" in article:  # if vulnerability status available (for CVE), append to details
                 details_field_value += "\n"
                 details_field_value += f"**Status:** {article['vuln_status']}"
             message.add_field(
                 name="Details: ",
-                value= details_field_value,
+                value=details_field_value,
                 inline=False,
             )
     else:
